@@ -8,6 +8,7 @@ bp_db = Blueprint('db')
 async def register_db(app, loop):
     mongo_client = AsyncIOMotorClient('localhost', 27017)
     app.config.db = mongo_client['real_world']
+    app.config.mongo = mongo_client
     article = {
         "article": {
             "slug": "how-to-train-your-dragon",
@@ -32,4 +33,4 @@ async def register_db(app, loop):
 
 @bp_db.listener('after_server_stop')
 async def close_db(app, loop):
-    app.config.db.close()
+    app.config.mongo.close()
