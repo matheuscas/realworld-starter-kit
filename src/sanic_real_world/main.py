@@ -1,7 +1,7 @@
 import asyncio
 import uvloop
-import db
-import article
+from . import db
+from . import article
 from sanic import Sanic
 from sanic.response import text
 
