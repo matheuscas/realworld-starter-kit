@@ -13,7 +13,7 @@ def articles_fixture():
     req, res = app.test_client.get('/articles')
     return {'req': req, 'res': res}
 
-def test_get_article_returns_200(articles_slug_fixture, articles_fixture):
+def test_get_article_returns_200(articles_slug_fixture):
     assert articles_slug_fixture['res'].status == 200
 
 def test_response_contains_article(articles_slug_fixture):
@@ -72,3 +72,6 @@ def test_response_contains_favoritesCount(articles_slug_fixture):
 def test_response_favoritesCount_is_integer(articles_slug_fixture):
     article = json.loads(articles_slug_fixture['res'].body)
     assert type(article['article']['favoritesCount']) == int
+
+def test_get_articles_returns_200(articles_fixture):
+    assert articles_fixture['res'].status == 200
