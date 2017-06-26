@@ -12,6 +12,7 @@ We've gone to great lengths to adhere to the **Sanic** community styleguides & b
 
 For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
 
+[![Build Status](https://travis-ci.org/matheuscas/realworld-starter-kit.svg?branch=master)](https://travis-ci.org/matheuscas/realworld-starter-kit)
 
 # How it works
 
