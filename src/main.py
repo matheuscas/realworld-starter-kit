@@ -1,9 +1,8 @@
 import asyncio
 import uvloop
-from . import db
-from . import article
 from sanic import Sanic
 from sanic.response import text
+from blueprints import db, article
 
 asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 

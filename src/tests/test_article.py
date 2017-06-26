@@ -1,4 +1,4 @@
-from ..sanic_real_world.main import app
+from main import app
 import pytest
 import json
 # import arrow
