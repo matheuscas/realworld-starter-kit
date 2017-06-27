@@ -13,4 +13,4 @@ async def get_article_by_slug(request, slug):
 async def get_articles(request):
     mongo_articles = await request.app.config['db'].articles.find().to_list(None)
     articles = list(map(lambda a: {'article': a['article']}, mongo_articles))
-    return json(articles)
+    return json({'articles': articles})
