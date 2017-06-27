@@ -30,6 +30,12 @@ def test_response_contains_articles(articles_fixture):
     if 'articles' in articles_fixture['result']:
         assert True
 
+def test_response_contains_articlesCount(articles_fixture):
+    'Response contains "articlesCount" property'
+
+    if 'articles' in articles_fixture['result']:
+        assert 'articlesCount' in articles_fixture['result']
+
 def test_response_contains_title(articles_fixture):
     'Article has "title" property'
 
