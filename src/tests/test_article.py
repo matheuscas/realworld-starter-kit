@@ -8,7 +8,13 @@ def articles_slug_fixture():
     req, res = app.test_client.get('/articles/how-to-train-your-dragon')
     return {'req': req, 'res': res}
 
-@pytest.fixture(params=['/articles/how-to-train-your-dragon', '/articles'])
+@pytest.fixture(params=[
+    '/articles/how-to-train-your-dragon',
+    '/articles',
+    '/articles?tag=dragons',
+    '/articles?favorited=jane',
+    '/articles?author=johnjacob'
+])
 def articles_fixture(request):
     req, res = app.test_client.get(request.param)
     return {'req': req, 'res': res, 'result': json.loads(res.body)}
