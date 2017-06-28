@@ -10,6 +10,7 @@ async def register_db(app, loop):
     app.config.db = mongo_client['real_world']
     app.config.mongo = mongo_client
     await populateArticles(app)
+    await populateTags(app)
 
 @bp_db.listener('after_server_stop')
 async def close_db(app, loop):
@@ -58,3 +59,11 @@ async def populateArticles(app):
     ]
     await app.config.db.articles.drop()
     app.config.db.articles.insert(articles)
+
+async def populateTags(app):
+    tags = [
+        {'name': "reactjs"},
+        {'name': "angularjs"}
+    ]
+    await app.config.db.tags.drop()
+    app.config.db.tags.insert(tags)
