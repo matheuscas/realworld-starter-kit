@@ -11,6 +11,7 @@ async def register_db(app, loop):
     app.config.mongo = mongo_client
     await populateArticles(app)
     await populateTags(app)
+    await populateProfiles(app)
 
 @bp_db.listener('after_server_stop')
 async def close_db(app, loop):
@@ -67,3 +68,15 @@ async def populateTags(app):
     ]
     await app.config.db.tags.drop()
     app.config.db.tags.insert(tags)
+
+async def populateProfiles(app):
+    profile = {
+        'profile': {
+            "username": "jake",
+            "bio": "I work at statefarm",
+            "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+            "following": False
+        }
+    }
+    await app.config.db.profiles.drop()
+    app.config.db.profiles.insert(profile)
