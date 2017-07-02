@@ -59,7 +59,10 @@ async def populateArticles(app):
         }
     ]
     await app.config.db.articles.drop()
-    app.config.db.articles.insert(articles)
+    first_article = await app.config.db.articles.insert_one(articles[0])
+    await populateComments(app, first_article.inserted_id)
+    await app.config.db.articles.insert_one(articles[1])
+
 
 async def populateTags(app):
     tags = [
@@ -80,3 +83,22 @@ async def populateProfiles(app):
     }
     await app.config.db.profiles.drop()
     app.config.db.profiles.insert(profile)
+
+async def populateComments(app, article_id):
+    comment = {
+        "comment": {
+            "id": 1,
+            "createdAt": "2016-02-18T03:22:56.637Z",
+            "updatedAt": "2016-02-18T03:22:56.637Z",
+            "body": "It takes a Jacobian",
+            "author": {
+                "username": "jake",
+                "bio": "I work at statefarm",
+                "image": "https://i.stack.imgur.com/xHWG8.jpg",
+                "following": False
+            },
+            "article_id": article_id
+        }
+    }
+    await app.config.db.comments.drop()
+    app.config.db.comments.insert(comment)
